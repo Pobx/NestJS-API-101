@@ -5,10 +5,12 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  UsePipes,
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './create-cat.dto';
 import { Cat } from 'src/cats/interfaces/cat.interface';
+import { JoiValidationPipe } from 'src/joi-validation-pipe.pipe';
 
 @Controller('cats')
 export class CatsController {
