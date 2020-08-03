@@ -4,7 +4,7 @@ import { PrimaryGeneratedColumn, Entity, Column } from 'typeorm';
 export class Cat {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column({ type: 'text', length: 500 }) name: string;
+  @Column('text') name: string;
 
   @Column('text') breed: string;
 

@@ -24,6 +24,7 @@ import { Connection } from 'typeorm';
 })
 export class AppModule implements NestModule {
   constructor(private readonly connection: Connection) {}
+
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
