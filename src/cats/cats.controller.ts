@@ -16,18 +16,18 @@ import { ValidationPipe } from 'src/validation.pipe';
 export class CatsController {
   constructor(private catsService: CatsService) {}
 
-  @Post()
-  async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
-    this.catsService.create(createCatDto);
-  }
+  // @Post()
+  // async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
+  //   this.catsService.create(createCatDto);
+  // }
 
-  @Get()
-  async findAll(): Promise<Cat[]> {
-    return this.catsService.findAll();
-  }
+  // @Get()
+  // async findAll(): Promise<Cat[]> {
+  //   return this.catsService.findAll();
+  // }
 
-  @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.catsService.findOne(id);
-  }
+  // @Get(':id')
+  // async findOne(@Param('id', ParseIntPipe) id: number) {
+  //   return this.catsService.findOne(id);
+  // }
 }

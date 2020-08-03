@@ -9,4 +9,5 @@ export class Cat {
   @Column('text') breed: string;
 
   @Column('int') age: number;
+  @Column({ default: false }) isPublished: boolean;
 }
