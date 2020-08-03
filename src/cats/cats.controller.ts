@@ -10,14 +10,14 @@ import {
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './create-cat.dto';
 import { Cat } from 'src/cats/interfaces/cat.interface';
-import { JoiValidationPipe } from 'src/joi-validation-pipe.pipe';
+import { ValidationPipe } from 'src/validation.pipe';
 
 @Controller('cats')
 export class CatsController {
   constructor(private catsService: CatsService) {}
 
   @Post()
-  async create(@Body() createCatDto: CreateCatDto) {
+  async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
   }
 
