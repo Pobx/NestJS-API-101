@@ -1,4 +1,5 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
@@ -10,7 +11,13 @@ import { FishController } from './fish/fish.controller';
 import { DogsController } from './dogs/dogs.controller';
 
 @Module({
-  imports: [CatsModule, CatsModule, DogsModule, FishModule],
+  imports: [
+    TypeOrmModule.forRoot(),
+    CatsModule,
+    CatsModule,
+    DogsModule,
+    FishModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
