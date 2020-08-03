@@ -25,7 +25,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      // .exclude('dogs')
       .forRoutes(CatsController, FishController, DogsController);
   }
 }
