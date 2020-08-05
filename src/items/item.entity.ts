@@ -4,7 +4,9 @@ import {
   UpdateDateColumn,
   Column,
   Entity,
+  ManyToOne,
 } from 'typeorm';
+import { Order } from 'src/orders/order.entity';
 
 @Entity({ name: 'Items' })
 export class Item {
@@ -21,4 +23,10 @@ export class Item {
 
   @Column({ type: 'bit', default: true })
   isActive: boolean;
+
+  @ManyToOne(
+    type => Order,
+    order => order.items,
+  )
+  order: Order;
 }
