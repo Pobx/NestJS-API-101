@@ -10,16 +10,19 @@ import {
   Delete,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { OrderDto } from './orders.dto';
+import { CreateOrderDto } from './create-orders.dto';
 import { Order } from './order.entity';
+import { UpdateOrderDto } from './update-orders.dto';
 
 @Controller('orders')
 export class OrdersController {
   constructor(private catsService: OrdersService) {}
 
   @Post()
-  async create(@Body(new ValidationPipe()) orderDto: OrderDto): Promise<Order> {
-    return this.catsService.create(orderDto);
+  async create(
+    @Body(new ValidationPipe()) createOrderDto: CreateOrderDto,
+  ): Promise<Order> {
+    return this.catsService.create(createOrderDto);
   }
 
   @Get()
@@ -35,9 +38,9 @@ export class OrdersController {
   @Put(':id')
   async update(
     @Param('id', ParseIntPipe) id,
-    @Body(new ValidationPipe()) orderDto: OrderDto,
+    @Body(new ValidationPipe()) updateOrderDto: UpdateOrderDto,
   ): Promise<any> {
-    return this.catsService.update(id, orderDto);
+    return this.catsService.update(id, updateOrderDto);
   }
 
   @Delete(':id')

@@ -1,5 +1,5 @@
 import { IsInt } from 'class-validator';
-export class OrderDto {
+export class CreateOrderDto {
   @IsInt()
   Id: number;
   isActive?: boolean;
