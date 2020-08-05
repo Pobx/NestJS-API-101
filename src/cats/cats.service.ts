@@ -19,11 +19,11 @@ export class CatsService {
     return await this.catsRepository.save(cat);
   }
 
-  async update(cat: Cat): Promise<UpdateResult> {
-    return await this.catsRepository.update(cat.id, cat);
+  async update(id: number, cat: CreateCatDto): Promise<UpdateResult> {
+    return await this.catsRepository.update(id, cat);
   }
 
-  async remove(id: number): Promise<DeleteResult> {
+  async delete(id: number): Promise<DeleteResult> {
     return await this.catsRepository.delete(id);
   }
 
