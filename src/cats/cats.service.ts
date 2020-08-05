@@ -7,6 +7,7 @@ import { CreateCatDto } from './create-cat.dto';
 @Injectable()
 export class CatsService {
   constructor(@InjectRepository(Cat) private catsRepository: Repository<Cat>) {}
+  
   async findAll(): Promise<Cat[]> {
     return await this.catsRepository.find();
   }
