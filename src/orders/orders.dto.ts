@@ -1,4 +1,4 @@
-import { IsInt, IsDate } from 'class-validator';
+import { IsInt } from 'class-validator';
 export class OrderDto {
   @IsInt()
   Id: number;
