@@ -17,5 +17,5 @@ export class Order {
   updatedDate: any;
 
   @Column({ type: 'bit', default: true })
-  isActive?: boolean;
+  isActive: boolean;
 }
