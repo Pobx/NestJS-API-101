@@ -10,8 +10,9 @@ import {
 export class Item {
   @PrimaryGeneratedColumn() Id: number;
 
-  @Column({ type: 'text', nullable: true, length: 100 })
+  @Column({ type: 'nvarchar', nullable: true })
   Name: string;
+
   @CreateDateColumn()
   createdDate: any;
 
