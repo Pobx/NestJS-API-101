@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './create-cat.dto';
-import { Cat } from 'src/cats/interfaces/cat.interface';
 import { ValidationPipe } from 'src/validation.pipe';
+import { Cat } from './cat.entity';
 
 @Controller('cats')
 export class CatsController {
@@ -20,6 +20,14 @@ export class CatsController {
   // async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
   //   this.catsService.create(createCatDto);
   // }
+
+  @Post()
+  async create(
+    @Body(new ValidationPipe()) createCatDto: CreateCatDto,
+  ): Promise<Cat> {
+    // const cat: Cat = Object.assign({}, createCatDto);
+    return this.catsService.create(createCatDto);
+  }
 
   @Get()
   async findAll(): Promise<Cat[]> {

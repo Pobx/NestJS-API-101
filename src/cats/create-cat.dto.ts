@@ -8,4 +8,6 @@ export class CreateCatDto {
 
   @IsString()
   breed: string;
+
+  isPublished?: boolean;
 }
