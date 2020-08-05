@@ -26,18 +26,4 @@ export class CatsService {
   async delete(id: number): Promise<DeleteResult> {
     return await this.catsRepository.delete(id);
   }
-
-  // private readonly cats: Cat[] = [];
-
-  // create(cat: Cat) {
-  //   this.cats.push(cat);
-  // }
-
-  // findAll(): Cat[] {
-  //   return this.cats;
-  // }
-
-  // findOne(id: number) {
-  //   return id;
-  // }
 }
