@@ -11,6 +11,7 @@ import { FishController } from './fish/fish.controller';
 import { DogsController } from './dogs/dogs.controller';
 import { Connection } from 'typeorm';
 import { OrdersModule } from './orders/orders.module';
+import { ItemsModule } from './items/items.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { OrdersModule } from './orders/orders.module';
     DogsModule,
     FishModule,
     OrdersModule,
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
