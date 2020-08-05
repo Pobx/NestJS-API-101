@@ -2,8 +2,8 @@
   "type": "mssql",
   "host": "localhost",
   "username": "sa",
-  "password": "Passwords1234",
-  "database": "poppy_db",
+  "password": "P@ssword1234",
+  "database": "lab_nestjs_db",
   "entities": ["dist/**/**.entity{.ts,.js}"],
   "synchronize": true
 }

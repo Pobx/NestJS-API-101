@@ -21,13 +21,13 @@ export class CatsController {
   //   this.catsService.create(createCatDto);
   // }
 
-  // @Get()
-  // async findAll(): Promise<Cat[]> {
-  //   return this.catsService.findAll();
-  // }
+  @Get()
+  async findAll(): Promise<Cat[]> {
+    return this.catsService.findAll();
+  }
 
-  // @Get(':id')
-  // async findOne(@Param('id', ParseIntPipe) id: number) {
-  //   return this.catsService.findOne(id);
-  // }
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.catsService.findOne(id);
+  }
 }
