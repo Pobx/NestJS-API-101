@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Column,
+  Entity,
 } from 'typeorm';
 
-export class Items {
+@Entity({ name: 'Items' })
+export class Item {
   @PrimaryGeneratedColumn() Id: number;
 
   @Column({ type: 'text', nullable: true, length: 100 })
