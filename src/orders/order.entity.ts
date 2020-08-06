@@ -18,7 +18,7 @@ export class Order {
   @UpdateDateColumn()
   updatedDate: any;
 
-  @Column({ type: 'bit', default: true })
+  @Column({ type: 'bit' })
   isActive: boolean;
 
   @OneToMany(

@@ -13,6 +13,7 @@ import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './create-orders.dto';
 import { Order } from './order.entity';
 import { UpdateOrderDto } from './update-orders.dto';
+import { TransactionRepository, Repository } from 'typeorm';
 
 @Controller('orders')
 export class OrdersController {
@@ -24,6 +25,20 @@ export class OrdersController {
   ): Promise<Order> {
     return this.orderService.create(createOrderDto);
   }
+
+  @Post('transactions')
+  async createTransaction(
+    @Body(new ValidationPipe()) createOrderDto: Order[],
+  ): Promise<void> {
+    await this.orderService.createTransaction(createOrderDto);
+  }
+  // @Post('transactions')
+  // async createTransaction(
+  //   order: Order,
+  //   @TransactionRepository(Order) userRepository: Repository<Order>,
+  // ) {
+  //   return await userRepository.save(order);
+  // }
 
   @Get()
   async findAll(): Promise<Order[]> {

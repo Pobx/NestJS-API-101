@@ -1,13 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './order.entity';
-import { Repository, UpdateResult, DeleteResult } from 'typeorm';
+import {
+  Repository,
+  UpdateResult,
+  DeleteResult,
+  Transaction,
+  TransactionRepository,
+  Connection,
+  getManager,
+} from 'typeorm';
 import { CreateOrderDto } from './create-orders.dto';
 import { UpdateOrderDto } from './update-orders.dto';
 
 @Injectable()
 export class OrdersService {
-  constructor(@InjectRepository(Order) private repository: Repository<Order>) {}
+  constructor(
+    @InjectRepository(Order) private repository: Repository<Order>,
+    private connection: Connection,
+  ) {}
 
   async findAll(): Promise<Order[]> {
     return await this.repository.find();
@@ -30,5 +41,32 @@ export class OrdersService {
 
   async delete(id: number): Promise<DeleteResult> {
     return await this.repository.delete(id);
+  }
+
+  async createTransaction(order: Order[]) {
+    await this.connection.transaction(async transactionalEntityManager => {
+      await transactionalEntityManager.save(order[0]);
+    });
+    // await this.connection.transaction(async transactionalEntityManager => {
+    //   await transactionalEntityManager.save(order[0]);
+    // });
+
+    // const queryRunner = this.connection.createQueryRunner();
+
+    // await queryRunner.connect();
+    // await queryRunner.startTransaction();
+    // try {
+    //   await queryRunner.manager.save(order[0]);
+
+    //   await queryRunner.commitTransaction();
+    //   console.log('OK')
+    // } catch (err) {
+    //   console.log(err)
+    //   // since we have errors lets rollback the changes we made
+    //   await queryRunner.rollbackTransaction();
+    // } finally {
+    //   // you need to release a queryRunner which was manually instantiated
+    //   await queryRunner.release();
+    // }
   }
 }

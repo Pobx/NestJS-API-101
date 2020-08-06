@@ -1,5 +1,6 @@
-import { Item } from 'src/items/item.entity';
+import { CreateItemDto } from 'src/items/create-items.dto';
+
 export class CreateOrderDto {
   isActive?: boolean;
-  items: Item[];
+  items: CreateItemDto[];
 }

@@ -21,7 +21,7 @@ export class Item {
   @UpdateDateColumn()
   updatedDate: any;
 
-  @Column({ type: 'bit', default: true })
+  @Column({ type: 'bit' })
   isActive: boolean;
 
   @ManyToOne(
