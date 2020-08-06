@@ -1,6 +1,5 @@
-import { IsInt } from 'class-validator';
+import { Item } from 'src/items/item.entity';
 export class CreateOrderDto {
-  @IsInt()
-  Id: number;
   isActive?: boolean;
+  items: Item[];
 }

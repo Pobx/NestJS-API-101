@@ -23,7 +23,10 @@ export class Order {
 
   @OneToMany(
     type => Item,
-    item => item.order,
+    items => items.order,
+    {
+      cascade: true,
+    },
   )
   items: Item[];
 }

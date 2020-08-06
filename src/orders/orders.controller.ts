@@ -16,23 +16,23 @@ import { UpdateOrderDto } from './update-orders.dto';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(private catsService: OrdersService) {}
+  constructor(private orderService: OrdersService) {}
 
   @Post()
   async create(
     @Body(new ValidationPipe()) createOrderDto: CreateOrderDto,
   ): Promise<Order> {
-    return this.catsService.create(createOrderDto);
+    return this.orderService.create(createOrderDto);
   }
 
   @Get()
   async findAll(): Promise<Order[]> {
-    return this.catsService.findAll();
+    return this.orderService.findAll();
   }
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.catsService.findOne(id);
+    return this.orderService.findOne(id);
   }
 
   @Put(':id')
@@ -40,11 +40,13 @@ export class OrdersController {
     @Param('id', ParseIntPipe) id,
     @Body(new ValidationPipe()) updateOrderDto: UpdateOrderDto,
   ): Promise<any> {
-    return this.catsService.update(id, updateOrderDto);
+    updateOrderDto.Id = id;
+    return this.orderService.create(updateOrderDto);
+    // return this.orderService.update(id, updateOrderDto);
   }
 
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id): Promise<any> {
-    return this.catsService.delete(id);
+    return this.orderService.delete(id);
   }
 }
