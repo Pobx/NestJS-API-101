@@ -25,8 +25,8 @@ export class Order {
     type => Item,
     items => items.order,
     {
-      cascade: false,
-      eager: false,
+      cascade: true,
+      eager: true,
     },
   )
   items: Item[];

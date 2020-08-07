@@ -13,7 +13,7 @@ import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './create-orders.dto';
 import { Order } from './order.entity';
 import { UpdateOrderDto } from './update-orders.dto';
-import { TransactionRepository, Repository } from 'typeorm';
+import { ResponseEntity } from 'src/response.model';
 
 @Controller('orders')
 export class OrdersController {
@@ -22,8 +22,17 @@ export class OrdersController {
   @Post()
   async create(
     @Body(new ValidationPipe()) createOrderDto: CreateOrderDto,
-  ): Promise<Order> {
-    return this.orderService.create(createOrderDto);
+  ): Promise<ResponseEntity<Order>> {
+    const result = await this.orderService.create(createOrderDto);
+
+    const response: ResponseEntity<Order> = new ResponseEntity<Order>();
+    response.Entitiy = new Order();
+    response.Entitiy.Id = result.identifiers[0].Id;
+    response.Entitiy.createdDate = createOrderDto.createdDate;
+    response.Entitiy.updatedDate = createOrderDto.updatedDate;
+    response.Entitiy.isActive = createOrderDto.isActive;
+
+    return response;
   }
 
   @Post('transactions')
@@ -32,13 +41,6 @@ export class OrdersController {
   ): Promise<void> {
     await this.orderService.createTransaction(createOrderDto);
   }
-  // @Post('transactions')
-  // async createTransaction(
-  //   order: Order,
-  //   @TransactionRepository(Order) userRepository: Repository<Order>,
-  // ) {
-  //   return await userRepository.save(order);
-  // }
 
   @Get()
   async findAll(): Promise<Order[]> {
@@ -56,8 +58,8 @@ export class OrdersController {
     @Body(new ValidationPipe()) updateOrderDto: UpdateOrderDto,
   ): Promise<any> {
     updateOrderDto.Id = id;
-    return this.orderService.create(updateOrderDto);
-    // return this.orderService.update(id, updateOrderDto);
+    // return this.orderService.create(updateOrderDto);
+    return this.orderService.update(id, updateOrderDto);
   }
 
   @Delete(':id')

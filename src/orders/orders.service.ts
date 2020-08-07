@@ -5,10 +5,8 @@ import {
   Repository,
   UpdateResult,
   DeleteResult,
-  Transaction,
-  TransactionRepository,
   Connection,
-  getManager,
+  InsertResult,
 } from 'typeorm';
 import { CreateOrderDto } from './create-orders.dto';
 import { UpdateOrderDto } from './update-orders.dto';
@@ -28,8 +26,8 @@ export class OrdersService {
     return await this.repository.findOne(id);
   }
 
-  async create(createOrderDto: CreateOrderDto): Promise<Order> {
-    return await this.repository.save(createOrderDto);
+  async create(createOrderDto: CreateOrderDto): Promise<InsertResult> {
+    return await this.repository.insert(createOrderDto);
   }
 
   async update(
@@ -45,7 +43,7 @@ export class OrdersService {
 
   async createTransaction(order: Order[]) {
     await this.connection.transaction(async transactionalEntityManager => {
-      await transactionalEntityManager.save(order[0]);
+      await transactionalEntityManager.save(Order, order[0]);
     });
     // await this.connection.transaction(async transactionalEntityManager => {
     //   await transactionalEntityManager.save(order[0]);
