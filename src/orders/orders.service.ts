@@ -41,11 +41,4 @@ export class OrdersService {
   async createTransactionSave(order: CreateOrderDto): Promise<Order> {
     return await this.repository.save(order);
   }
-
-  async createTransactionInsert(items: any): Promise<void> {
-    await this.connection.transaction(async manager => {
-      const result = await manager.insert(Item, items);
-
-    });
-  }
 }
