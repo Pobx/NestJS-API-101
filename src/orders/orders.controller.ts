@@ -23,11 +23,8 @@ export class OrdersController {
   async create(
     @Body(new ValidationPipe()) createOrderDto: CreateOrderDto,
   ): Promise<ResponseEntity<Order>> {
-    const result = await this.orderService.create(createOrderDto);
-
     const response: ResponseEntity<Order> = new ResponseEntity<Order>();
-    response.Entity = new Order();
-    response.Entity = result;
+    response.Entity = await this.orderService.create(createOrderDto);
 
     return response;
   }
@@ -37,9 +34,7 @@ export class OrdersController {
     @Body(new ValidationPipe()) createOrderDto: CreateOrderDto,
   ): Promise<ResponseEntity<Order>> {
     const response: ResponseEntity<Order> = new ResponseEntity<Order>();
-    response.Entity = new Order();
-    const result = await this.orderService.createTransaction(createOrderDto);
-    response.Entity = createOrderDto;
+    response.Entity =await this.orderService.createTransaction(createOrderDto);
     return response;
   }
    
@@ -53,7 +48,10 @@ export class OrdersController {
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.orderService.findOne(id);
+    const response: ResponseEntity<Order> = new ResponseEntity<Order>();
+
+    response.Entity = await this.orderService.findOne(id);
+    return response;
   }
 
   @Put(':id')
