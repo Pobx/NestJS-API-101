@@ -1,7 +1,8 @@
 export class ResponseEntity<T> {
-  Entitiy:T;
+  Entity: T;
   statusCode?: number;
   message?: string;
   timestamp?: any;
   path?: string;
+
 }

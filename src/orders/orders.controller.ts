@@ -26,25 +26,29 @@ export class OrdersController {
     const result = await this.orderService.create(createOrderDto);
 
     const response: ResponseEntity<Order> = new ResponseEntity<Order>();
-    response.Entitiy = new Order();
-    response.Entitiy.Id = result.identifiers[0].Id;
-    response.Entitiy.createdDate = createOrderDto.createdDate;
-    response.Entitiy.updatedDate = createOrderDto.updatedDate;
-    response.Entitiy.isActive = createOrderDto.isActive;
+    response.Entity = new Order();
+    response.Entity = result;
 
     return response;
   }
 
   @Post('transactions')
   async createTransaction(
-    @Body(new ValidationPipe()) createOrderDto: Order[],
-  ): Promise<void> {
-    await this.orderService.createTransaction(createOrderDto);
+    @Body(new ValidationPipe()) createOrderDto: CreateOrderDto,
+  ): Promise<ResponseEntity<Order>> {
+    const response: ResponseEntity<Order> = new ResponseEntity<Order>();
+    response.Entity = new Order();
+    const result = await this.orderService.createTransaction(createOrderDto);
+    response.Entity = createOrderDto;
+    return response;
   }
-
+   
   @Get()
-  async findAll(): Promise<Order[]> {
-    return this.orderService.findAll();
+  async findAll(): Promise<ResponseEntity<Order[]>> {
+    const response: ResponseEntity<Order[]> = new ResponseEntity<Order[]>();
+    response.Entity  =  await this.orderService.findAll();
+
+    return response;
   }
 
   @Get(':id')
@@ -58,7 +62,6 @@ export class OrdersController {
     @Body(new ValidationPipe()) updateOrderDto: UpdateOrderDto,
   ): Promise<any> {
     updateOrderDto.Id = id;
-    // return this.orderService.create(updateOrderDto);
     return this.orderService.update(id, updateOrderDto);
   }
 
