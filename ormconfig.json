@@ -2,7 +2,7 @@
   "type": "mssql",
   "host": "localhost",
   "username": "sa",
-  "password": "P@ssword1234",
+  "password": "Passwords1234",
   "database": "lab_nestjs_db",
   "entities": ["dist/**/**.entity{.ts,.js}"],
   "synchronize": true
