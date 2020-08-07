@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './order.entity';
-import { Repository, UpdateResult, DeleteResult } from 'typeorm';
+import { Repository, UpdateResult, DeleteResult, Connection } from 'typeorm';
 import { CreateOrderDto } from './create-orders.dto';
 import { UpdateOrderDto } from './update-orders.dto';
 import { Item } from 'src/items/item.entity';
 
 @Injectable()
 export class OrdersService {
-  constructor(@InjectRepository(Order) private repository: Repository<Order>) {}
+  constructor(
+    @InjectRepository(Order) private repository: Repository<Order>,
+    private connection: Connection,
+  ) {}
 
   async findAll(): Promise<Order[]> {
     return await this.repository.find();
@@ -35,7 +38,14 @@ export class OrdersService {
     return await this.repository.delete(id);
   }
 
-  async createTransaction(order: CreateOrderDto): Promise<Order> {
+  async createTransactionSave(order: CreateOrderDto): Promise<Order> {
     return await this.repository.save(order);
+  }
+
+  async createTransactionInsert(items: any): Promise<void> {
+    await this.connection.transaction(async manager => {
+      const result = await manager.insert(Item, items);
+
+    });
   }
 }

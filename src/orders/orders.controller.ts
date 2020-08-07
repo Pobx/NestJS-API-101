@@ -14,6 +14,8 @@ import { CreateOrderDto } from './create-orders.dto';
 import { Order } from './order.entity';
 import { UpdateOrderDto } from './update-orders.dto';
 import { ResponseEntity } from 'src/response.model';
+import { DeleteResult } from 'typeorm';
+import { Item } from 'src/items/item.entity';
 
 @Controller('orders')
 export class OrdersController {
@@ -29,19 +31,21 @@ export class OrdersController {
     return response;
   }
 
-  @Post('transactions')
-  async createTransaction(
+  @Post('transactions-save')
+  async createTransactionSave(
     @Body(new ValidationPipe()) createOrderDto: CreateOrderDto,
   ): Promise<ResponseEntity<Order>> {
     const response: ResponseEntity<Order> = new ResponseEntity<Order>();
-    response.Entity =await this.orderService.createTransaction(createOrderDto);
+    response.Entity = await this.orderService.createTransactionSave(
+      createOrderDto,
+    );
     return response;
   }
-   
+
   @Get()
   async findAll(): Promise<ResponseEntity<Order[]>> {
     const response: ResponseEntity<Order[]> = new ResponseEntity<Order[]>();
-    response.Entity  =  await this.orderService.findAll();
+    response.Entity = await this.orderService.findAll();
 
     return response;
   }
@@ -64,7 +68,7 @@ export class OrdersController {
   }
 
   @Delete(':id')
-  async delete(@Param('id', ParseIntPipe) id): Promise<any> {
-    return this.orderService.delete(id);
+  async delete(@Param('id', ParseIntPipe) id): Promise<DeleteResult> {
+    return await this.orderService.delete(id);
   }
 }

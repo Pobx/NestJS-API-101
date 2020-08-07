@@ -25,8 +25,9 @@ export class Order {
     type => Item,
     items => items.order,
     {
-      cascade: true,
+      cascade: ['insert', 'update'],
       eager: false,
+      onDelete: 'SET NULL',
     },
   )
   items: Item[];
