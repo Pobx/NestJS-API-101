@@ -17,10 +17,14 @@ import { ResponseEntity } from 'src/response.model';
 import { DeleteResult } from 'typeorm';
 import { Item } from 'src/items/item.entity';
 import { CreateItemDto } from 'src/items/create-items.dto';
+import { ItemsService } from 'src/items/items.service';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(private orderService: OrdersService) {}
+  constructor(
+    private orderService: OrdersService,
+    private itemService: ItemsService,
+  ) {}
 
   @Post()
   async create(
@@ -37,7 +41,7 @@ export class OrdersController {
     @Body(new ValidationPipe()) createItemDto: CreateItemDto,
   ): Promise<ResponseEntity<Item>> {
     const response: ResponseEntity<Item> = new ResponseEntity<Item>();
-    response.Entity = await this.orderService.createItem(createItemDto);
+    response.Entity = await this.itemService.create(createItemDto);
 
     return response;
   }
