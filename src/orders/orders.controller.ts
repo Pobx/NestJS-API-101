@@ -16,6 +16,7 @@ import { UpdateOrderDto } from './update-orders.dto';
 import { ResponseEntity } from 'src/response.model';
 import { DeleteResult } from 'typeorm';
 import { Item } from 'src/items/item.entity';
+import { CreateItemDto } from 'src/items/create-items.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -27,6 +28,16 @@ export class OrdersController {
   ): Promise<ResponseEntity<Order>> {
     const response: ResponseEntity<Order> = new ResponseEntity<Order>();
     response.Entity = await this.orderService.create(createOrderDto);
+
+    return response;
+  }
+
+  @Post('createItem')
+  async createItem(
+    @Body(new ValidationPipe()) createItemDto: CreateItemDto,
+  ): Promise<ResponseEntity<Item>> {
+    const response: ResponseEntity<Item> = new ResponseEntity<Item>();
+    response.Entity = await this.orderService.createItem(createItemDto);
 
     return response;
   }

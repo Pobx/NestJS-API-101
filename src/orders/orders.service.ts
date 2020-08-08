@@ -5,6 +5,7 @@ import { Repository, UpdateResult, DeleteResult, Connection } from 'typeorm';
 import { CreateOrderDto } from './create-orders.dto';
 import { UpdateOrderDto } from './update-orders.dto';
 import { Item } from 'src/items/item.entity';
+import { CreateItemDto } from 'src/items/create-items.dto';
 
 @Injectable()
 export class OrdersService {
