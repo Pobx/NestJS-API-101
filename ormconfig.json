@@ -5,5 +5,10 @@
   "password": "Passwords1234",
   "database": "lab_nestjs_db",
   "entities": ["dist/**/**.entity{.ts,.js}"],
-  "synchronize": true
+  "synchronize": false,
+  "migrationsTableName": "custom_migration_table",
+  "migrations": ["migration/*.js"],
+  "cli": {
+      "migrationsDir": "migration"
+  }
 }
