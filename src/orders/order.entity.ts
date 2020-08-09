@@ -18,6 +18,9 @@ export class Order {
   @UpdateDateColumn()
   updatedDate: any;
 
+  @Column({ type: 'nvarchar' })
+  Name: string;
+
   @Column({ type: 'bit' })
   isActive: boolean;
 

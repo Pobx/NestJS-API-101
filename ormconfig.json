@@ -6,6 +6,9 @@
   "database": "lab_nestjs_db",
   "entities": ["dist/**/**.entity{.ts,.js}"],
   "synchronize": false,
+  "logging": true,
+  "logger":"simple-console",
+  "maxQueryExecutionTime": 30000,
   "migrationsTableName": "custom_migration_table",
   "migrations": ["migration/*.js"],
   "cli": {

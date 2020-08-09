@@ -1,4 +1,4 @@
-import { IsIn, IsInt, IsBoolean, IsDate, IsDateString } from 'class-validator';
+import { IsInt, IsBoolean, IsDateString, IsString } from 'class-validator';
 import { Item } from 'src/items/item.entity';
 
 export class CreateOrderDto {
@@ -14,5 +14,8 @@ export class CreateOrderDto {
   @IsDateString()
   updatedDate: any;
 
-  items: Item[]
+  @IsString()
+  Name: string;
+
+  items: Item[];
 }
