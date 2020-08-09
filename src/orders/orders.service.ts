@@ -6,6 +6,7 @@ import { CreateOrderDto } from './create-orders.dto';
 import { UpdateOrderDto } from './update-orders.dto';
 import { Item } from 'src/items/item.entity';
 import { CreateItemDto } from 'src/items/create-items.dto';
+import { async } from 'rxjs';
 
 @Injectable()
 export class OrdersService {
@@ -41,5 +42,20 @@ export class OrdersService {
 
   async createTransactionSave(order: CreateOrderDto): Promise<Order> {
     return await this.repository.save(order);
+  }
+
+  async createTransactionInsert(order: CreateOrderDto): Promise<Order> {
+    return await this.connection.transaction(async manager => {
+      await manager.insert(Order, order);
+      const items: Item[] = order.items.map(value => {
+        value.orderId = order.Id;
+        return value;
+      });
+
+      await manager.insert(Item, items);
+      order.items = items;
+
+      return order;
+    });
   }
 }

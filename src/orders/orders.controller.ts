@@ -57,6 +57,17 @@ export class OrdersController {
     return response;
   }
 
+  @Post('transactions-insert')
+  async createTransactionInsert(
+    @Body(new ValidationPipe()) createOrderDto: CreateOrderDto,
+  ): Promise<ResponseEntity<Order>> {
+    const response: ResponseEntity<Order> = new ResponseEntity<Order>();
+    response.Entity = await this.orderService.createTransactionInsert(
+      createOrderDto,
+    );
+    return response;
+  }
+
   @Get()
   async findAll(): Promise<ResponseEntity<Order[]>> {
     const response: ResponseEntity<Order[]> = new ResponseEntity<Order[]>();

@@ -24,6 +24,9 @@ export class Item {
   @Column({ type: 'bit' })
   isActive: boolean;
 
+  @Column({ nullable: true})
+  orderId: number;
+
   @ManyToOne(
     type => Order,
     order => order.items,
