@@ -5,8 +5,6 @@ import { Repository, UpdateResult, DeleteResult, Connection } from 'typeorm';
 import { CreateOrderDto } from './create-orders.dto';
 import { UpdateOrderDto } from './update-orders.dto';
 import { Item } from 'src/items/item.entity';
-import { CreateItemDto } from 'src/items/create-items.dto';
-import { async } from 'rxjs';
 
 @Injectable()
 export class OrdersService {
@@ -25,6 +23,7 @@ export class OrdersService {
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
     const result = await this.repository.insert(createOrderDto);
+    return createOrderDto;
     const order = new Order();
     return this.repository.merge(order, createOrderDto);
   }

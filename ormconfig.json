@@ -7,11 +7,12 @@
   "entities": ["dist/**/**.entity{.ts,.js}"],
   "synchronize": false,
   "logging": true,
-  "logger":"simple-console",
+  "logger": "advanced-console",
   "maxQueryExecutionTime": 30000,
+  "migrationsRun": false,
   "migrationsTableName": "custom_migration_table",
-  "migrations": ["migration/*.js"],
+  "migrations": ["dist/migration/*{.ts,.js}"],
   "cli": {
-      "migrationsDir": "migration"
+    "migrationsDir": "migration"
   }
 }

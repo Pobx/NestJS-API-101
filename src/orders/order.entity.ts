@@ -18,7 +18,7 @@ export class Order {
   @UpdateDateColumn()
   updatedDate: any;
 
-  @Column({ type: 'nvarchar' })
+  @Column({ type: 'nvarchar', nullable: true })
   Name: string;
 
   @Column({ type: 'bit' })

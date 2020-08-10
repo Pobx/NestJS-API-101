@@ -6,6 +6,8 @@ import { LoggerMiddleware } from './logger.middleware';
 import { Connection } from 'typeorm';
 import { OrdersModule } from './orders/orders.module';
 import { ItemsModule } from './items/items.module';
+import { OrdersController } from './orders/orders.controller';
+import { ItemsController } from './items/items.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot(), OrdersModule, ItemsModule],
@@ -16,6 +18,8 @@ export class AppModule implements NestModule {
   constructor(private readonly connection: Connection) {}
 
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes(OrdersModule, ItemsModule);
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes(OrdersController, ItemsController);
   }
 }
