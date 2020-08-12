@@ -2,7 +2,7 @@ import { IsInt, IsBoolean, IsDateString, IsString } from 'class-validator';
 import { Item } from 'src/items/item.entity';
 
 export class CreateOrderDto {
-  @IsInt({ message: 'บ่ได้เด้อ' })
+  @IsInt({ message: 'ต้องใส่โตเลขเด้อ บ่ใส่บ่ได้เด้อ' })
   Id: number;
 
   @IsBoolean()
@@ -14,7 +14,7 @@ export class CreateOrderDto {
   @IsDateString()
   updatedDate: any;
 
-  @IsString()
+  @IsString({message: 'ใส่ Name นำเด้อพี่น้อง'})
   Name: string;
 
   items: Item[];
