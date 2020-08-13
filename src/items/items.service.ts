@@ -11,8 +11,9 @@ export class ItemsService {
   ) {}
 
   async create(createItemDto: CreateItemDto): Promise<Item> {
-    const result = await this.repositoryItem.insert(createItemDto);
-    const item = new Item();
-    return this.repositoryItem.merge(item, createItemDto);
+    await this.repositoryItem.insert(createItemDto);
+    // const item = new Item();
+    // return this.repositoryItem.merge(item, createItemDto);
+    return createItemDto;
   }
 }

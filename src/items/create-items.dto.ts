@@ -1,4 +1,5 @@
 import { IsString, IsInt } from 'class-validator';
+import { Order } from 'src/orders/order.entity';
 
 export class CreateItemDto {
   @IsInt()
@@ -10,5 +11,8 @@ export class CreateItemDto {
   @IsString()
   Name: string;
 
-  isActive?: boolean;
+  isActive: boolean;
+  createdDate: any;
+  updatedDate: any;
+  order: Order;
 }
