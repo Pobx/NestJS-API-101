@@ -21,6 +21,13 @@ export class Order {
   @Column({ type: 'nvarchar', nullable: true })
   Name: string;
 
+  @Column({ type: 'nvarchar', nullable: true })
+
+  Name2: string;
+  
+  @Column({ type: 'nvarchar', nullable: true })
+  Name3: string;
+
   @Column({ type: 'bit' })
   isActive: boolean;
 

@@ -14,8 +14,12 @@ export class CreateOrderDto {
   @IsDateString()
   updatedDate: any;
 
-  @IsString({message: 'ใส่ Name นำเด้อพี่น้อง'})
+  // @IsString({ message: 'ใส่ Name นำเด้อพี่น้อง' })
+  @IsString()
   Name: string;
+
+  Name2: string;
+  Name3: string;
 
   items: Item[];
 }
