@@ -18,7 +18,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const message = exception.message;
     const responseModel = new ResponseEntity<any>();
     const errorMessages = exception.getResponse();
-    console.log(errorMessages)
 
     responseModel.Entity = null;
     responseModel.message = message;

@@ -24,19 +24,16 @@ export class OrdersService {
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
     const result = await this.repository.insert(createOrderDto);
     return createOrderDto;
-    const order = new Order();
-    return this.repository.merge(order, createOrderDto);
   }
 
-  async update(
-    id: number,
-    updateOrderDto: UpdateOrderDto,
-  ): Promise<UpdateResult> {
-    return await this.repository.update(id, updateOrderDto);
+  async update(id: number, updateOrderDto: UpdateOrderDto): Promise<Order> {
+    await this.repository.update(id, updateOrderDto);
+    return updateOrderDto;
   }
 
-  async delete(id: number): Promise<DeleteResult> {
-    return await this.repository.delete(id);
+  async delete(id: number): Promise<Order> {
+    await this.repository.delete(id);
+    return null;
   }
 
   async createTransactionSave(order: CreateOrderDto): Promise<Order> {
